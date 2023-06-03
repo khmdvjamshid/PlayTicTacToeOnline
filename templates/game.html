@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+        }
+
+        td:hover {
+            background-color: #f5f5f5;
+        }
+
+        button {
+            width: 100%;
+            height: 100%;
+            padding: 110;
+            margin: 10;
+            font-size: 20px;
+            
+        }
+
+    </style>
+
+</head>
+<body class="bg-dark">
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="container">
+        
+            {% if winner.symbol %}
+                    <h3 class="alert alert-success">The winner is: <i>{{winner.symbol}}</i></h3>
+            {% else %}
+                <h1 class="text-white">Tic Tac Toe</h1>
+            {% endif %}
+
+            <form  method="POST">
+                {% csrf_token %}
+
+                {% if messages %}
+                        {% for message in messages %}
+                            <div {% if message.tags %} class="alert alert-{{message.tags}} text-xxl-center text-center" {% endif %}> 
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                {% endif %}
+
+                <table>
+                    <tr> 
+                        <td><button type="submit" name="cell" value="1" class="btn btn-info btn-lg">{{ game_state.state.0 }}</button></td>
+                        <td><button type="submit" name="cell" value="2" class="btn btn-info btn-lg">{{ game_state.state.1 }}</button></td>
+                        <td><button type="submit" name="cell" value="3" class="btn btn-info btn-lg">{{ game_state.state.2 }}</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" name="cell" value="4" class="btn btn-info btn-lg">{{ game_state.state.3 }}</button></td>
+                        <td><button type="submit" name="cell" value="5" class="btn btn-info btn-lg">{{ game_state.state.4 }}</button></td>
+                        <td><button type="submit" name="cell" value="6" class="btn btn-info btn-lg">{{ game_state.state.5 }}</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="submit" name="cell" value="7" class="btn btn-info btn-lg">{{ game_state.state.6 }}</button></td>
+                        <td><button type="submit" name="cell" value="8" class="btn btn-info btn-lg">{{ game_state.state.7 }}</button></td>
+                        <td><button type="submit" name="cell" value="9" class="btn btn-info btn-lg">{{ game_state.state.8 }}</button></td>  
+                    </tr>            
+                </table>
+
+                <br>   
+                <button type="submit" name="refresh" class="refresh-button btn btn-danger">Refresh</button>
+                
+            </form>
+        </div>
+    </div>
+    
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>
